@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" name="" id="names">
+    <input type="text" name="" id="passwords">
+    <button id="tn">Submit</button>
+
+
+
+    <button id="btn"> Click me!!</button>
+    <img id="myImage" src="" alt="" width="500">
+    <!-- <form action="/signup" method="POST">
+        <input type="text" name="nsma">
+
+        <input type="text" name="value">
+        <button type="submit" id='subm'>submit</button> -->
+
+
+    </form>
+
+    <script>
+        tn.onclick = function () {
+
+            fetch('./signup', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+
+                    name: names.value,
+                    value: passwords.value
+
+                })
+            }).then((res) => {
+                return res.blob();
+            }).then((res) => {
+                let url = URL.createObjectURL(res);
+                myImage.src = url;
+            }).catch((res) => {
+                console.log(res);
+            })
+
+
+
+
+
+        }
+        btn.onclick = function () {
+            fetch("./login", {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: names.value,
+                    password: passwords.value
+                })
+            }).then((res) => {
+                return res.json()
+            }).then((resp) => {
+                let img = document.createElement("img");
+                console.log(resp)
+                img.src = URL.createObjectURL(resp);
+                document.body.appendChild(img);
+                // console.log(res.blob())
+            })
+        }
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
